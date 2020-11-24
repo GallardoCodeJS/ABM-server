@@ -44,8 +44,7 @@ app.post("/api/login",(req,res)=>{
 
     const sqlSelect = "SELECT * FROM user WHERE Id = ?";
     db.query(sqlSelect, [id], (err,result)=>{
-        res.send(result);              
-        console.log(result);
+        res.send(result);
     });
 });
 
