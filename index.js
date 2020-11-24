@@ -50,8 +50,22 @@ app.post("/api/login",(req,res)=>{
 
 //Editar usuario
 app.post("/api/useredit",(req,res) =>{
-    const Ci = req.body.Ci
+    const Ci    = req.body.Ci
+    const Name  = req.body.Name
+    const Age   = req.body.Age
+    const Email = req.body.Email
+
+    /*
     console.log("Cedula seleccionada:" +Ci);
+    console.log("Nombre seleccionado:" +Name);
+    console.log("Edad seleccionado:" +Age);
+    console.log("Email seleccionado:" +Email);
+    */
+
+    const sqlUpdate = "UPDATE persona SET Age = ?, Name = ?, Email = ? WHERE Ci = ?";
+    db.query(sqlUpdate, [Age,Name,Email,Ci], (err,result) => {
+        console.log(result);
+    })
 });
 
 //Eliminar usuario
