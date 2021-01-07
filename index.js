@@ -75,7 +75,7 @@ app.get("/api/login", (req, res) => {
     }
 });
 
-//Login de usuario con session y cookies
+//Login de usuario con session y cookies!
 app.post("/api/login", (req, res) => {
     const id = req.body.id
     const pass = req.body.pass;
