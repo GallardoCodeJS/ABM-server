@@ -42,9 +42,12 @@ app.post("/api/login",(req,res)=>{
     const user  = req.body.user
     const pass  = req.body.pass
 
+    console.log(id,user,pass);
+
     const sqlSelect = "SELECT * FROM user WHERE Id = ?";
     db.query(sqlSelect, [id], (err,result)=>{
         res.send(result);
+        //console.log(result);
     });
 });
 
@@ -70,12 +73,6 @@ app.post("/api/userdelete",(req,res) => {
         console.log(result);
     })
     //console.log("Cedula eliminada es:" +ci);
-});
-
-//Mirar usuario
-app.post("/api/userview",(req,res) => {
-    const Ci = req.body.Ci
-    console.log("Cedula a mirar:" +Ci);
 });
 
 //Insert user by MYSQL
