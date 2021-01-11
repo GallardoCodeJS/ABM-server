@@ -1,7 +1,6 @@
 const express = require("express");
 const cors = require("cors");
 const app = express();
-
 //Llama la clase mysql
 const mysql = require('mysql');
 
@@ -14,8 +13,9 @@ const session = require('express-session');
 const db = mysql.createPool({
     host: "127.0.0.1",
     user: "root",
-    password: "Sanmiguel2018$.",
+    password: "nacional141899",
     database: "basenacho",
+    port: 3306,
     pool: {
         max: 5,
         min: 0,
@@ -31,6 +31,7 @@ app.use(cors({
     credentials: true
 }
 ));
+
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(
@@ -48,6 +49,7 @@ app.use(
 //Use of express
 app.use(express.json());
 
+//DATABASE//
 
 //Select all user form user table
 app.get("/api/loginselect", (req, res) => {
@@ -61,7 +63,7 @@ app.get("/api/loginselect", (req, res) => {
 app.get("/api/get", (req, res) => {
     const sqlSelect = "SELECT * FROM persona";
     db.query(sqlSelect, (err, result) => {
-        //console.log(result);
+        console.log(result);
         res.send(result);
     });
 });
@@ -137,6 +139,26 @@ app.post("/api/insert", (req, res) => {
         console.log(result);
     });
 });
+
+//Index page default
+app.get('/', (req, res) => {
+    res.sendFile('./views/index.html', { root: __dirname });
+});
+
+//AboutPage
+app.get('/About',(req,res) => {
+    res.sendFile('./views/About.html', {root: __dirname});
+})
+
+//Redirects about page
+app.get('about-us',(req,res) => {
+    res.redirect('/about');
+});
+
+//404Page
+app.use((req,res) => {
+    res.status(404).sendFile('./views/404.html', {root: __dirname});
+})
 
 //Listening
 app.listen(3001, () => {
