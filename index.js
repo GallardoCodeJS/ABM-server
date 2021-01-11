@@ -2,6 +2,9 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 
+//Route
+const path = require('path');
+
 //Llama la clase mysql
 const mysql = require('mysql');
 
@@ -36,7 +39,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(
     session({
         key: "useID",
-        secret: "subscribe",
+        secret: "mysession",
         resave: false,
         saveUninitialized: false,
         cookie: {
@@ -93,7 +96,7 @@ app.post("/api/login", (req, res) => {
                 console.log(req.session.user);
                 res.send(result);
             } else {
-                res.send({ message: "Error caca culo" });
+                res.send({ message: "Error usuario/contraseña" });
             }
         }
     );
@@ -138,14 +141,19 @@ app.post("/api/insert", (req, res) => {
     });
 });
 
+// ROUTE CONFIG //
+app.set('views', path.join(__dirname,'views'))
+app.set('view engine','ejs');
 
-//  PAGES //
+// ROUTES //
+app.use(require('./routes/index'));
 
 //Listening
 app.listen(3001, () => {
     console.log("Corriendo en puerto 3001");
 });
 
+/*
 //Index page default
 app.get('/', (req, res) => {
     res.sendFile('./views/index.html', { root: __dirname });
@@ -165,6 +173,7 @@ app.get('about-us',(req,res) => {
 app.use((req,res) => {
     res.status(404).sendFile('./views/404.html', {root: __dirname});
 })
+*/
 
 
 

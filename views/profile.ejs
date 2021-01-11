@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Perfil Page</title>
+</head>
+
+<body>
+    <h1>Perfil</h1>
+    <% function nueva(){ console.log("Hola mundo"); } %>
+        <% if(user){ %>
+            <p>User ID:
+                <%= user.id %>
+            </p>
+            <p>User pass:
+                <%= user.pass %>
+            </p>
+            <a href="/about">About</a>
+            
+            <%}else{ %>
+                <p>No a iniciado sesion</p>
+                <a href="/about">Volver</a>
+                <%}%>
+                
+</body>
+
+</html>
