@@ -24,7 +24,7 @@ const db = mysql.createPool({
     }
 });
 
-//Session % Cookies
+//Session & Cookies
 app.use(cors({
     origin: ["http://localhost:3000"],
     methods: ["GET", "POST"],
@@ -138,8 +138,33 @@ app.post("/api/insert", (req, res) => {
     });
 });
 
+
+//  PAGES //
+
 //Listening
 app.listen(3001, () => {
     console.log("Corriendo en puerto 3001");
 });
+
+//Index page default
+app.get('/', (req, res) => {
+    res.sendFile('./views/index.html', { root: __dirname });
+});
+
+//AboutPage
+app.get('/About',(req,res) => {
+    res.sendFile('./views/About.html', {root: __dirname});
+})
+
+//Redirects about page
+app.get('about-us',(req,res) => {
+    res.redirect('/about');
+});
+
+//404Page
+app.use((req,res) => {
+    res.status(404).sendFile('./views/404.html', {root: __dirname});
+})
+
+
 
