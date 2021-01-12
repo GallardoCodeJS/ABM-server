@@ -102,9 +102,29 @@ app.post("/api/login", (req, res) => {
     );
 });
 
-
-//Editar usuario
+//Editar USer
 app.post("/api/useredit", (req, res) => {
+    const Id = req.body.Id
+    const Name = req.body.Name
+
+    const sqlUpdate = "UPDATE user SET Name = ? WHERE Id = ?";
+    db.query(sqlUpdate, [Name, Id], (err, result) => {
+        console.log(result);
+    })
+});
+
+//Delete USER
+app.post("/api/deleteuser", (req,res) => {
+    const Id = req.body.Id
+    const sqlDelete = "DELETE FROM user WHERE Id = ?";
+    db.query(sqlDelete, [Id], (err, result) => {
+        console.log(result);
+    })
+})
+
+
+//Editar persona
+app.post("/api/personedit", (req, res) => {
     const Ci = req.body.Ci
     const Name = req.body.Name
     const Age = req.body.Age
@@ -116,8 +136,8 @@ app.post("/api/useredit", (req, res) => {
     })
 });
 
-//Eliminar usuario
-app.post("/api/userdelete", (req, res) => {
+//Eliminar persona
+app.post("/api/persondelete", (req, res) => {
     const Ci = req.body.Ci
 
     const sqlDelete = "DELETE FROM persona WHERE Ci = ?";
