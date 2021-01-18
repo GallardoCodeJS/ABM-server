@@ -101,6 +101,17 @@ app.post("/api/login", (req, res) => {
         }
     );
 });
+//Creat User
+app.post("/api/usercreate", (req,res) => {
+    
+    const Name = req.body.Name
+    const Pass = req.body.Pass
+
+    const sqlInsert = "INSERT INTO user (Name, Password) VALUES (?,?)";
+    db.query(sqlInsert, [Name,Pass], (err,result) => {
+        console.log(result);
+    })
+});
 
 //Editar USer
 app.post("/api/useredit", (req, res) => {
