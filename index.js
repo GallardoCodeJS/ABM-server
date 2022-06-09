@@ -13,15 +13,16 @@ const session = require('express-session');
 const db = mysql.createPool({
     host: "127.0.0.1",
     user: "root",
-    password: "nacional141899",
+    password: "",
     database: "basenacho",
-    port: 3306,
-    pool: {
-        max: 5,
-        min: 0,
-        acquire: 30000,
-        idle: 10000
-    }
+    port: 3306
+    // ,
+    // pool: {
+    //     max: 5,
+    //     min: 0,
+    //     acquire: 30000,
+    //     idle: 10000
+    // }
 });
 
 //Session % Cookies
@@ -95,7 +96,7 @@ app.post("/api/login", (req, res) => {
                 console.log(req.session.user);
                 res.send(result);
             } else {
-                res.send({ message: "Error caca culo" });
+                res.send({ message: "Error" });
             }
         }
     );
